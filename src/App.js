@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
@@ -55,21 +55,27 @@ class App extends React.Component {
     // by placing header outside of switch, it will always render regardles of what switch decides to render...
     // if the path is exactly as stated, route to path. if the path contains shop, route to shop...
     return (
+      // the render method in route to the signin will redirect to the shop page if a user exists, otherwise will proceed to signin and signup page...
       <div>
         <Header/>
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route path='/shop' component={ShopPage}/>
-          <Route path='/signin' component={SignInSignUp}/>
+          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInSignUp />)} />
         </Switch>
       </div>
     );
   }
 };
 
+// Give app access to state from the root reducer, and set the currentUser...
+// off the state, destructure user reducer (ie. state.user)
+const mapStateToProps = ({ user }) => {
+  return ({
+    currentUser: user.currentUser
+  })
+};
 
-
-// map dispatchToProps
 const mapDispatchToProps = (dispatch) => {
   return ({
     // we set a new setcurrentuser property, that points to a function that takes a user and dispatches objects to all reducers that contain a payload of that user...
@@ -80,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // connect does not take an initial state in this case, as we are just giving app access to dispatching props, so it is set to null...
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

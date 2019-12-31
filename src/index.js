@@ -8,7 +8,8 @@ import App from './App';
 
 import './index.css';
 
-
+// provider is acces to the redux state...
+// browserrouter is for routing...
 ReactDOM.render(
    <Provider store={store}>
       <BrowserRouter>
