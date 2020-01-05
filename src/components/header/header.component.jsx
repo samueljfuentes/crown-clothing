@@ -35,14 +35,14 @@ const Header = ({ currentUser, hidden }) => {
    )
 }
 
-// from connect, take the state that lives in root reducer, and use the values from the state in this component...
-// destructure: state.user.currentUser, and state.cart.hidden...
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
-   return ({
-      currentUser,
-      hidden
-   })
-}
+///////////////
+///// NOTE:
+// MAP STATE TO PROPS GETS CALLED EVERYTIME STATE IS CHANGED (SINCE STATE CHANGES ARE RETURNS OF BRAND NEW OBJECTS...)
+// REGARDLESS IF IT IS NOT CONCERNED WITH THE DATA BEING CHANGED...
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+   currentUser,
+   hidden
+});
 
 // connect allows header to pull from the root reducer using mapStateToProps... 
 // calling connect returns a higher order component that you THEN pass the header component into...

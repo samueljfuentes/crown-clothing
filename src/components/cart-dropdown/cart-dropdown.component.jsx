@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component';
+import { selectCartItems } from '../../redux/cart/cart.selectors';
 
 import './cart-dropdown.styles.scss';
 
@@ -19,9 +20,12 @@ const CartDropdown = ({ cartItems }) => (
    </div>
 );
 
-
-const mapStateToProps = ({ cart: { cartItems } }) => ({
-   cartItems
+///////////////
+///// NOTE:
+// MAP STATE TO PROPS GETS CALLED EVERYTIME STATE IS CHANGED (SINCE STATE CHANGES ARE RETURNS OF BRAND NEW OBJECTS...)
+// REGARDLESS IF IT IS NOT CONCERNED WITH THE DATA BEING CHANGED...
+const mapStateToProps = (state) => ({
+   cartItems: selectCartItems(state)
 });
 
 export default connect(mapStateToProps)(CartDropdown);
