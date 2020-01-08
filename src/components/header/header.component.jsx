@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../database/firebase.utils';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
 
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -39,9 +43,9 @@ const Header = ({ currentUser, hidden }) => {
 ///// NOTE:
 // MAP STATE TO PROPS GETS CALLED EVERYTIME STATE IS CHANGED (SINCE STATE CHANGES ARE RETURNS OF BRAND NEW OBJECTS...)
 // REGARDLESS IF IT IS NOT CONCERNED WITH THE DATA BEING CHANGED...
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-   currentUser,
-   hidden
+const mapStateToProps = createStructuredSelector({
+   currentUser: selectCurrentUser,
+   hidden: selectCartHidden
 });
 
 // connect allows header to pull from the root reducer using mapStateToProps... 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 // we want to toggle show or hide dropdown from clicking on the icon...
 import { toggleDropdown } from '../../redux/cart/cart.actions';
@@ -31,8 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
 // REGARDLESS IF IT IS NOT CONCERNED WITH THE DATA BEING CHANGED...
 // create itemCount property on state...
 // must pass entire state since the input selectors require it to build selectItemCount...
-const mapStateToProps = (state) => ({
-   itemCount: selectItemCount(state)
+const mapStateToProps = createStructuredSelector({
+   itemCount: selectItemCount
 });
 
 // connect this component to be able to dispatch actions so other components can decide if they will receive as props...
