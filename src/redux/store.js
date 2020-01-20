@@ -9,7 +9,7 @@ const middlewares = [];
 
 if (process.env.NODE_ENV === "development") {
    middlewares.push(logger);
-}
+};
 
 // create a store by passing in the root reducer, and the apply middleware that takes in all the values of the middlewares array...
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));

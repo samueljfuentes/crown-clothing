@@ -12,13 +12,14 @@ export const selectCollectionsForPreview = createSelector(
    [selectCollections],
    // takes the collections, and returns an array of the keys, then map over those keys to return the value at that key...
    // ie.. will return the array at that key array...
-   (collections) => Object.keys(collections).map((key) => collections[key])
+   // must check if collections exists since the original state is null until it is brought in from back end...
+   (collections) => collections ? Object.keys(collections).map((key) => collections[key]) : []
 )
 
 // selectCurrentSelection is a curried function (ie. returns another function) that returns createSelector function...
 export const selectCurrentCollection = (collectionUrlParam) => (
    createSelector(
       [selectCollections],
-      (collections) => collections[collectionUrlParam]
+      (collections) => (collections ? collections[collectionUrlParam] : null)
    )
 );

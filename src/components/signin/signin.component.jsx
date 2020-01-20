@@ -10,7 +10,7 @@ import './signin.styles.scss';
 class SignIn extends React.Component {
    
    constructor(props) {
-      super();
+      super(props);
 
       this.state = {
          email: '',
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
    };
 
    render() {
-      return(
+      return (
          <div className='sign-in'>
             <h2>I Already Have An Account</h2>
             <span>Sign in with your e-mail and password</span>
@@ -54,8 +54,8 @@ class SignIn extends React.Component {
                </div>
             </form>
          </div>
-      )
-   };
+      );
+   }
 }
 
 export default SignIn;

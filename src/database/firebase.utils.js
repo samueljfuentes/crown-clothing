@@ -48,6 +48,53 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// add collections and respective data to firebase asynchronously...
+export const addCollectionAndDocuments = async ( collection, documents ) => {
+  // create collectionReference based on the collection
+  const collectionRef = firestore.collection(collection);
+  // create a new batch to add multiple collections to firestore
+  const batch = firestore.batch();
+  // for each object in the collection, create a documentReferenece based on the collectionRef above,
+  // then set that docref in the batch with the object data...
+  documents.forEach((document) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, document);
+  });
+
+  // add batch to firestore...
+  // commit returns a promise when successful/failed...
+  return await batch.commit();
+};
+
+// will be passed into reducer...
+// takes the collections snapshot that firebase returns and turns it into an object...
+export const convertCollectionSnapshotToMap = (collections) => {
+  // set a new transformed object = to an array of objects of each docSnapshot...
+  const transformedCollection = collections.docs.map((docSnapshot) => {
+    // destructure out title and items... MUST CALL DATA TO return the object inside the doc...
+    const { title, items } = docSnapshot.data();
+    // from the map, return an object with all the data required for each docSnapshot object...
+    return {
+      title,
+      items,
+      // encodeURI takes a string and processes into a uri valid format; we also lowercase it...
+      routeName: encodeURI(title.toLowerCase()),
+      // id lives on the actual doc itself, not the object inside
+      id: docSnapshot.id
+    };
+  });
+
+  // return the final object from convert collections to snapshot call...
+  // take the transformed collection array of objects, and reduce into a single object (which is initially empty)...
+  return transformedCollection.reduce((accumulator, collection) => {
+    // for every collection...
+    // in the accumulator, set a new key equal to the lowercase collection.title, that has a value of the collection object...
+    accumulator[collection.title.toLowerCase()] = collection;
+    // return the accumulator in every iteration...
+    return accumulator;
+  }, {});
+};
+
 firebase.initializeApp(config);
 
 // grant access to firebase authentication and firestore to the app needs it...
