@@ -31,8 +31,7 @@ const Header = ({ currentUser, hidden }) => {
             <CartIcon />
          </OptionsContainer>
          { /* SHOW STATE FOR DROPDOWN WILL NOT LIVE ON EVENT HANDLER HERE,
-            SINCE THE HEADER WILL NOT BE THE ONLY LOCATION TO DETERMINE SHOW STATE*/
-         /* if hidden is true, display nothing, otherwise display cart... */ }
+            SINCE THE HEADER WILL NOT BE THE ONLY LOCATION TO DETERMINE SHOW STATE*/ }
          { hidden ? null : <CartDropdown />}
       </HeaderContainer>
    )

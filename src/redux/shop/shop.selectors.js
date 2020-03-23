@@ -20,6 +20,17 @@ export const selectCollectionsForPreview = createSelector(
 export const selectCurrentCollection = (collectionUrlParam) => (
    createSelector(
       [selectCollections],
-      (collections) => (collections ? collections[collectionUrlParam] : null)
+      (collections) => (collections ? collections[collectionUrlParam.toLowerCase()] : null)
    )
+);
+
+export const selectIsCollectionFetching = createSelector(
+   [selectShop],
+   (shop) => shop.isFetching
+);
+
+export const selectIsCollectionLoaded = createSelector(
+   [selectShop],
+   // double bang takes the following value and transforms it to true or false if value is truthy or falsey...
+   (shop) => !!shop.collections
 );
