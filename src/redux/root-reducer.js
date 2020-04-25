@@ -12,7 +12,7 @@ import shopReducer from './shop/shop.reducer';
 const persistConfig = {
    key: 'root',
    storage,
-   // whitelist property takes an array of string names of the reducers to be stored...
+   // whitelist property takes an array of string names of the reducers to be persisted by redux persist...
    whitelist: ['cart']
 };
 
