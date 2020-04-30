@@ -3,25 +3,33 @@ import { connect } from 'react-redux';
 
 import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cart.actions';
 
-import './checkout-item.styles.scss';
+import { 
+   CheckoutItemContainer,
+   CheckoutImageContainer,
+   CheckoutItemImage,
+   ChekcoutItemText,
+   CheckoutItemQuantity,
+   RemoveButton
+ } from './checkout-item.styles';
 
 const checkoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
-   // destructure within the function so we have access to the entire cartItem object and not just its destructured properties...
    const { name, imageUrl, price, quantity } = cartItem;
 
-   return (<div className="checkout-item">
-      <div className="image-container">
-         <img src={imageUrl} alt="item"/>
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-         <div className="arrow" onClick={() => removeItem(cartItem)}>&#10094;</div>
-         <span className="value">{quantity}</span>
-         <div className="arrow" onClick={() => addItem(cartItem)}>&#10095;</div>
-      </span>
-      <span className="price">{price}</span>
-      <div className="remove-button" onClick={() => clearItem(cartItem)}>&#10006;</div>
-   </div>)
+   return (
+      <CheckoutItemContainer>
+         <CheckoutImageContainer>
+            <CheckoutItemImage src={imageUrl} alt="Item image"/>
+         </CheckoutImageContainer>
+         <ChekcoutItemText>{name}</ChekcoutItemText>
+         <CheckoutItemQuantity>
+            <div className="arrow" onClick={() => removeItem(cartItem)}>&#10094;</div>
+            <span className="value">{quantity}</span>
+            <div className="arrow" onClick={() => addItem(cartItem)}>&#10095;</div>
+         </CheckoutItemQuantity>
+         <ChekcoutItemText>${price}</ChekcoutItemText>
+         <RemoveButton onClick={() => clearItem(cartItem)}>&#10006;</RemoveButton>
+      </CheckoutItemContainer>
+   )
 };
 
 const mapDispatchToProps = (dispatch) => ({
