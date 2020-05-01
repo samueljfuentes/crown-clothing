@@ -6,10 +6,10 @@ import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
 import CollectionPreview from '../collection-preview/collection-preview.component';
 
-import './collection-overview.styles.scss';
+import { CollectionOverviewContainer } from './collection-overview.styles';
 
 const collectionOverview = ({ collections }) => (
-   <div className="collection-overview">
+   <CollectionOverviewContainer>
       {
          // destructure id from each collection, and set it as key... all other collection props get set as themselves. ie: title: {title}, etc...
          collections.map(({ id, ...otherCollectionProps }) => {
@@ -19,7 +19,7 @@ const collectionOverview = ({ collections }) => (
             )
          })
       }
-   </div>
+   </CollectionOverviewContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
