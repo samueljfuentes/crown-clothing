@@ -38,7 +38,6 @@ class SignIn extends React.Component {
    handleChange = (event) => {
       // from the event, take out the value (what user types) and name (email or password)...
       const { value, name } = event.target;
-      // sets the state of whatever name is being targeted (email, password), and sets it to the value of the value of the target (ie, what the user typed in...)
       this.setState({ [name]: value });
    };
 
