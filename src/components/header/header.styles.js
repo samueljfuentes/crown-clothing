@@ -9,7 +9,6 @@ export const HeaderContainer = styled.div`
    margin-bottom: 25px;
 `;
 
-// this logo container will replace the link element, so it must extend it to maintain route functionality...
 export const LogoContainer = styled(Link)`
    height: 100%;
    width: 75px;

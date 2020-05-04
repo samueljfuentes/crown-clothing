@@ -1,22 +1,23 @@
 import React from 'react';
 
-import './form-input.styles.scss';
+import {
+   GroupContainer,
+   FormInputContainer,
+   FormInputLabel
+} from './form-input.styles';
 
 const FormInput = ({ handleChange, label, ...otherProps }) => {
    return(
-      <div className="group">
-         <input className="form-input" onChange={handleChange} {...otherProps /* all props from signin component such as name, value, type */}/>
+      <GroupContainer>
+         <FormInputContainer onChange={handleChange} {...otherProps}/>
          {
-            // if there is a label, render the label div with dynamic values, otherwise render null
             label ? 
-            // if value exists, apply the shrink class name shrink. always has form-input label class
-            //ie... as soon as someone types, add shrink class
-            (<label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
+            (<FormInputLabel className={otherProps.value.length ? 'shrink' : ''}>
                {label}
-            </label>)
+            </FormInputLabel>)
             : null
          }
-      </div>
+      </GroupContainer>
    )
 }
 
