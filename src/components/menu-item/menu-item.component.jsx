@@ -9,6 +9,7 @@ import {
    ContentSubtitle
 } from './menu-item.styles';
 
+
 // destructure out title from props... (ie: props.title)
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
    return (
